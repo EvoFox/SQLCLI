@@ -25,7 +25,10 @@ exports.Actor = sequelize.define("Actor", {
 
 	movie_id: {
 		type: DataTypes.INTEGER,
-		
 		allowNull: false,
+		references: {
+			model: Movie,
+			key: "id",
+		},
 	},
 });
