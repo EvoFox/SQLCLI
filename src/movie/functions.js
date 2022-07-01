@@ -55,7 +55,6 @@ exports.deleteMovie = async (criteria) => {
 };
 
 exports.addActor = async (actorObj) => {
-	
 	try {
 		const response = await Actor.create(actorObj);
 		console.log(response);
@@ -66,8 +65,11 @@ exports.addActor = async (actorObj) => {
 
 exports.listActors = async (criteria) => {
 	try {
+		await Movie.hasMany(Actor);
+		await Actor.belongsTo(Movie);
+
 		console.log(
-			Actor.findAll({
+			await Actor.findAll({
 				include: [
 					{
 						model: Movie,

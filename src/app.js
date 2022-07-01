@@ -12,7 +12,7 @@ const {
 const app = async (yargsObj) => {
 	try {
 		await sequelize.sync({ alter: true });
-		// Create 
+		// Create
 		if (yargsObj.add) {
 			// Creates a movie entry in the database
 			await addMovie({ title: yargsObj.title, rating: yargsObj.rating });
@@ -45,8 +45,7 @@ const app = async (yargsObj) => {
 			const criteria = yargsObj.delete;
 
 			await deleteMovie(criteria);
-		} else if (yargsObj.addActor)
-		{
+		} else if (yargsObj.addActor) {
 			// Adds a row into a second table, this table is currently not utilised until I figure out the procedure for JOIN's using Sequelize
 			await addActor({
 				name: yargsObj.addActor,
@@ -55,8 +54,8 @@ const app = async (yargsObj) => {
 			});
 
 			// This section of code is for a planned feature, once I figure out how to write a SELECT query that utilises a JOIN in Sequelize
-			// } else if (yargsObj.getActorsFrom) {
-			// 	listActors(yargsObj.getActorsFrom);
+		} else if (yargsObj.getActorsFrom) {
+			await listActors(yargsObj.getActorsFrom);
 		} else {
 			// List commands
 		}
