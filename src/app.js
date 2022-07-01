@@ -15,7 +15,7 @@ const app = async (yargsObj) => {
 		// Create 
 		if (yargsObj.add) {
 			// Creates a movie entry in the database
-			await addMovie({ title: yargsObj.title });
+			await addMovie({ title: yargsObj.title, rating: yargsObj.rating });
 		}
 		// Read
 		else if (yargsObj.list) {
