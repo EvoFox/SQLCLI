@@ -29,3 +29,5 @@ Every command should be run from the terminal, with you being scoped into the ro
   > This command allows the user to delete a single movie that matches the title they provide.
 - `--addActor="A Name" --movie_id=[An existing movie ID] (Optional: --nationality="Nationality")`
   > This command allows the user to insert an actor into a secondary table, currently this data cannot be accessed by the application again, as I am researching how to list records using a JOIN statement using Sequelize
+- `--listGetActorsFrom="A Movie"`
+  > This command allows a user to search for a movie, and fetch all of the actors that are attributed to that movie.

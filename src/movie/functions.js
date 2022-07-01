@@ -68,18 +68,30 @@ exports.listActors = async (criteria) => {
 		await Movie.hasMany(Actor);
 		await Actor.belongsTo(Movie);
 
-		console.log(
-			await Actor.findAll({
-				include: [
-					{
-						model: Movie,
-						where: { title: criteria },
+		const response = await Actor.findAll({
+			attributes: {
+				exclude: ["movieId", "createdAt", "updatedAt"],
+			},
+			include: [
+				{
+					model: Movie,
+					where: { title: criteria },
+					attributes: {
+						exclude: [
+							"MovieID",
+							"Movie.id",
+							"Movie.createdAt",
+							"Movie.updatedAt",
+						],
 					},
-				],
-			})
-		);
+				},
+			],
+		});
+
 		for (result in response) {
-			console.table(response[result]);
+			console.table(response[result], ["id", "name", "nationality"]);
 		}
-	} catch (error) {}
+	} catch (error) {
+		console.error("An error has occurred while fetching data:", error);
+	}
 };

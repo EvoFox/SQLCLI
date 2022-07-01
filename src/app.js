@@ -50,7 +50,7 @@ const app = async (yargsObj) => {
 			await addActor({
 				name: yargsObj.addActor,
 				nationality: yargsObj.nationality,
-				movie_id: yargsObj.movie_id,
+				movieId: yargsObj.movie_id,
 			});
 
 			// This section of code is for a planned feature, once I figure out how to write a SELECT query that utilises a JOIN in Sequelize

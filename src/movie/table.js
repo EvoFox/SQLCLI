@@ -23,7 +23,7 @@ exports.Actor = sequelize.define("Actor", {
 		defaultValue: "Not Specified",
 	},
 
-	movie_id: {
+	movieId: {
 		type: DataTypes.INTEGER,
 		allowNull: false,
 		references: {
