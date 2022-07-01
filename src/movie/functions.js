@@ -55,7 +55,6 @@ exports.deleteMovie = async (criteria) => {
 };
 
 exports.addActor = async (actorObj) => {
-	
 	try {
 		const response = await Actor.create(actorObj);
 		console.log(response);
@@ -66,18 +65,33 @@ exports.addActor = async (actorObj) => {
 
 exports.listActors = async (criteria) => {
 	try {
-		console.log(
-			Actor.findAll({
-				include: [
-					{
-						model: Movie,
-						where: { title: criteria },
+		await Movie.hasMany(Actor);
+		await Actor.belongsTo(Movie);
+
+		const response = await Actor.findAll({
+			attributes: {
+				exclude: ["movieId", "createdAt", "updatedAt"],
+			},
+			include: [
+				{
+					model: Movie,
+					where: { title: criteria },
+					attributes: {
+						exclude: [
+							"MovieID",
+							"Movie.id",
+							"Movie.createdAt",
+							"Movie.updatedAt",
+						],
 					},
-				],
-			})
-		);
+				},
+			],
+		});
+
 		for (result in response) {
-			console.table(response[result]);
+			console.table(response[result], ["id", "name", "nationality"]);
 		}
-	} catch (error) {}
+	} catch (error) {
+		console.error("An error has occurred while fetching data:", error);
+	}
 };
