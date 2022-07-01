@@ -45,16 +45,18 @@ const app = async (yargsObj) => {
 			const criteria = yargsObj.delete;
 
 			await deleteMovie(criteria);
-		} else if (yargsObj.addActor) {
+		}
+		// Create on secondary table
+		else if (yargsObj.addActor) {
 			// Adds a row into a second table, this table is currently not utilised until I figure out the procedure for JOIN's using Sequelize
 			await addActor({
 				name: yargsObj.addActor,
 				nationality: yargsObj.nationality,
 				movieId: yargsObj.movie_id,
 			});
-
-			// This section of code is for a planned feature, once I figure out how to write a SELECT query that utilises a JOIN in Sequelize
-		} else if (yargsObj.getActorsFrom) {
+		}
+		// Read on multiple tables
+		else if (yargsObj.getActorsFrom) {
 			await listActors(yargsObj.getActorsFrom);
 		} else {
 			// List commands
